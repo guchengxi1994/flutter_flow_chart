@@ -104,6 +104,9 @@ class FlowChart extends StatefulWidget {
     FlowElement destElement,
   )? onLineSecondaryLongTapped;
 
+  /// callback for creating connection
+  final Function(String sourceId, String destId)? onConnectionCreated;
+
   /// main dashboard to use
   final Dashboard dashboard;
 
@@ -128,6 +131,7 @@ class FlowChart extends StatefulWidget {
     this.onLineSecondaryTapped,
     this.onLineSecondaryLongTapped,
     this.onScaleUpdate,
+    this.onConnectionCreated,
     required this.dashboard,
   });
 
@@ -307,6 +311,10 @@ class _FlowChartState extends State<FlowChart> {
                       : (context, position, handler, element) =>
                           widget.onHandlerSecondaryLongTapped!(
                               context, position, handler, element),
+              onConnectionCreated: widget.onConnectionCreated == null
+                  ? (_, __) => true
+                  : (sourceId, destId) =>
+                      widget.onConnectionCreated!(sourceId, destId),
             ),
           // Draw arrows
           for (int i = 0; i < widget.dashboard.elements.length; i++)

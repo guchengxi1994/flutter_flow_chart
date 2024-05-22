@@ -43,20 +43,21 @@ class ElementWidget extends StatefulWidget {
     Handler handler,
     FlowElement element,
   )? onHandlerSecondaryLongTapped;
+  final Function(String sourceId, String destId)? onConnectionCreated;
 
-  const ElementWidget({
-    super.key,
-    required this.dashboard,
-    required this.element,
-    this.onElementPressed,
-    this.onElementSecondaryTapped,
-    this.onElementLongPressed,
-    this.onElementSecondaryLongTapped,
-    this.onHandlerPressed,
-    this.onHandlerSecondaryTapped,
-    this.onHandlerLongPressed,
-    this.onHandlerSecondaryLongTapped,
-  });
+  const ElementWidget(
+      {super.key,
+      required this.dashboard,
+      required this.element,
+      this.onElementPressed,
+      this.onElementSecondaryTapped,
+      this.onElementLongPressed,
+      this.onElementSecondaryLongTapped,
+      this.onHandlerPressed,
+      this.onHandlerSecondaryTapped,
+      this.onHandlerLongPressed,
+      this.onHandlerSecondaryLongTapped,
+      this.onConnectionCreated});
 
   @override
   State<ElementWidget> createState() => _ElementWidgetState();
@@ -173,6 +174,7 @@ class _ElementWidgetState extends State<ElementWidget> {
               onHandlerSecondaryTapped: widget.onHandlerSecondaryTapped,
               onHandlerLongPressed: widget.onHandlerLongPressed,
               onHandlerSecondaryLongTapped: widget.onHandlerSecondaryLongTapped,
+              onConnectionCreated: widget.onConnectionCreated,
               child: element,
             ),
             onDragUpdate: (details) {

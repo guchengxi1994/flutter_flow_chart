@@ -107,6 +107,12 @@ class _MyHomePageState extends State<MyHomePage> {
             debugPrint('handler long pressed: position $position '
                 'handler $handler" of element $element');
           },
+          onLineLongPressed: (context, clickPosition, srcElement, destElement) {
+            dashboard.removeConnectionByElements(srcElement, destElement);
+          },
+          onConnectionCreated: (sourceId, destId) {
+            return true;
+          },
         ),
       ),
       floatingActionButton: FloatingActionButton(

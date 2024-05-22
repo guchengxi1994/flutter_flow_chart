@@ -34,18 +34,19 @@ class ElementHandlers extends StatelessWidget {
     Handler handler,
     FlowElement element,
   )? onHandlerSecondaryLongTapped;
+  final Function(String sourceId, String destId)? onConnectionCreated;
 
-  const ElementHandlers({
-    super.key,
-    required this.dashboard,
-    required this.element,
-    required this.handlerSize,
-    required this.child,
-    required this.onHandlerPressed,
-    required this.onHandlerSecondaryTapped,
-    required this.onHandlerLongPressed,
-    required this.onHandlerSecondaryLongTapped,
-  });
+  const ElementHandlers(
+      {super.key,
+      required this.dashboard,
+      required this.element,
+      required this.handlerSize,
+      required this.child,
+      required this.onHandlerPressed,
+      required this.onHandlerSecondaryTapped,
+      required this.onHandlerLongPressed,
+      required this.onHandlerSecondaryLongTapped,
+      required this.onConnectionCreated});
 
   @override
   Widget build(BuildContext context) {
@@ -66,6 +67,7 @@ class ElementHandlers extends StatelessWidget {
               onHandlerSecondaryTapped: onHandlerSecondaryTapped,
               onHandlerLongPressed: onHandlerLongPressed,
               onHandlerSecondaryLongTapped: onHandlerSecondaryLongTapped,
+              onConnectionCreated: onConnectionCreated,
             ),
         ],
       ),
@@ -102,17 +104,18 @@ class _ElementHandler extends StatelessWidget {
     Handler handler,
     FlowElement element,
   )? onHandlerSecondaryLongTapped;
+  final Function(String sourceId, String destId)? onConnectionCreated;
 
-  const _ElementHandler({
-    required this.element,
-    required this.handler,
-    required this.dashboard,
-    required this.handlerSize,
-    required this.onHandlerPressed,
-    required this.onHandlerSecondaryTapped,
-    required this.onHandlerLongPressed,
-    required this.onHandlerSecondaryLongTapped,
-  });
+  const _ElementHandler(
+      {required this.element,
+      required this.handler,
+      required this.dashboard,
+      required this.handlerSize,
+      required this.onHandlerPressed,
+      required this.onHandlerSecondaryTapped,
+      required this.onHandlerLongPressed,
+      required this.onHandlerSecondaryLongTapped,
+      required this.onConnectionCreated});
 
   @override
   Widget build(BuildContext context) {
@@ -146,11 +149,16 @@ class _ElementHandler extends StatelessWidget {
           return true;
         },
         onAcceptWithDetails: (details) {
-          dashboard.addNextById(
-            details.data['srcElement'],
-            element.id,
-            DrawingArrow.instance.params.copyWith(endArrowPosition: alignment),
-          );
+          if (onConnectionCreated == null ||
+              onConnectionCreated!(details.data['srcElement'].id, element.id) ==
+                  true) {
+            dashboard.addNextById(
+              details.data['srcElement'],
+              element.id,
+              DrawingArrow.instance.params
+                  .copyWith(endArrowPosition: alignment),
+            );
+          }
         },
         onLeave: (data) {
           DrawingArrow.instance.setParams(DrawingArrow.instance.params
