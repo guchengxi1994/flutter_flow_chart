@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 import 'text_menu.dart';
 import 'element_settings_menu.dart';
@@ -296,7 +297,7 @@ class _MyHomePageState extends State<MyHomePage> {
               dashboard.addElement(FlowElement(
                   position: position,
                   size: const Size(200, 100),
-                  text: '${dashboard.elements.length}',
+                  text: jsonEncode({"node": "1111", "description": "2222"}),
                   handlerSize: 25,
                   kind: ElementKind.mindMap,
                   handlers: [

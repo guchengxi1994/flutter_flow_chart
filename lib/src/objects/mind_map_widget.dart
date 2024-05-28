@@ -13,11 +13,11 @@ class MindMapItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Map<String, String> map;
+    Map<dynamic, dynamic> map;
 
     try {
       map = jsonDecode(element.text);
-    } catch (_) {
+    } catch (e) {
       map = {"node": element.text, "description": ""};
     }
 
@@ -45,7 +45,8 @@ class MindMapItemWidget extends StatelessWidget {
           children: [
             Expanded(
               flex: 1,
-              child: SizedBox(
+              child: Align(
+                alignment: Alignment.center,
                 child: Text(
                   map['node']!,
                   textAlign: TextAlign.center,
@@ -66,18 +67,20 @@ class MindMapItemWidget extends StatelessWidget {
             ),
             Expanded(
               flex: 2,
-              child: SizedBox(
+              child: Align(
+                  alignment: Alignment.center,
                   child: Text(
-                map['description']!,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: element.textColor,
-                  fontSize: element.textSize,
-                  fontWeight:
-                      element.textIsBold ? FontWeight.bold : FontWeight.normal,
-                  fontFamily: element.fontFamily,
-                ),
-              )),
+                    map['description']!,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: element.textColor,
+                      fontSize: element.textSize,
+                      fontWeight: element.textIsBold
+                          ? FontWeight.bold
+                          : FontWeight.normal,
+                      fontFamily: element.fontFamily,
+                    ),
+                  )),
             )
           ],
         ),
