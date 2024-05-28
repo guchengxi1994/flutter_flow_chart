@@ -46,7 +46,18 @@ class MindMapItemWidget extends StatelessWidget {
             Expanded(
               flex: 1,
               child: SizedBox(
-                child: Text(map['node']!),
+                child: Text(
+                  map['node']!,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: element.textColor,
+                    fontSize: element.textSize,
+                    fontWeight: element.textIsBold
+                        ? FontWeight.bold
+                        : FontWeight.normal,
+                    fontFamily: element.fontFamily,
+                  ),
+                ),
               ),
             ),
             Divider(
@@ -55,7 +66,18 @@ class MindMapItemWidget extends StatelessWidget {
             ),
             Expanded(
               flex: 2,
-              child: SizedBox(child: Text(map['description']!)),
+              child: SizedBox(
+                  child: Text(
+                map['description']!,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: element.textColor,
+                  fontSize: element.textSize,
+                  fontWeight:
+                      element.textIsBold ? FontWeight.bold : FontWeight.normal,
+                  fontFamily: element.fontFamily,
+                ),
+              )),
             )
           ],
         ),

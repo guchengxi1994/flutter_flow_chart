@@ -291,6 +291,23 @@ class _MyHomePageState extends State<MyHomePage> {
             },
           ),
           ActionChip(
+            label: const Text('Add mind-map'),
+            onPressed: () {
+              dashboard.addElement(FlowElement(
+                  position: position,
+                  size: const Size(200, 100),
+                  text: '${dashboard.elements.length}',
+                  handlerSize: 25,
+                  kind: ElementKind.mindMap,
+                  handlers: [
+                    Handler.bottomCenter,
+                    Handler.topCenter,
+                    Handler.leftCenter,
+                    Handler.rightCenter,
+                  ]));
+            },
+          ),
+          ActionChip(
             label: const Text('Add oval'),
             onPressed: () {
               dashboard.addElement(FlowElement(

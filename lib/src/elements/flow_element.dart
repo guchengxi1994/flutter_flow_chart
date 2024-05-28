@@ -10,6 +10,7 @@ enum ElementKind {
   oval,
   parallelogram,
   hexagon,
+  mindMap,
 }
 
 enum Handler {

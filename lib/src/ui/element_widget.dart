@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_flow_chart/flutter_flow_chart.dart';
+import 'package:flutter_flow_chart/src/objects/mind_map_widget.dart';
 import 'package:flutter_flow_chart/src/ui/resize_widget.dart';
 import 'package:flutter_flow_chart/src/objects/oval_widget.dart';
 import 'package:flutter_flow_chart/src/ui/element_handlers.dart';
@@ -102,6 +103,9 @@ class _ElementWidgetState extends State<ElementWidget> {
         break;
       case ElementKind.hexagon:
         element = HexagonWidget(element: widget.element);
+        break;
+      case ElementKind.mindMap:
+        element = MindMapItemWidget(element: widget.element);
         break;
       case ElementKind.rectangle:
       default:
